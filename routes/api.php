@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/zip-codes/{zip_code}', 'ZipCodesController@zipCodes')->name('get-zipcodes');
+Route::get('zip-codes/{zip_code}', 'ZipCodesController@zipCodes')->name('get-zipcodes');
 
