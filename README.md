@@ -76,3 +76,32 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Base de datos
+Para generar la base de datos, fueron creadas las migraciones correspondientes
+![alt text](https://github.com/AlexHu65/blackbone/blob/main/capturas/4.png)
+
+Se agrego un archivo .sql en la ruta principal del proyecto, en la cual ya fueron corridos los comandos
+![alt text](https://github.com/AlexHu65/blackbone/blob/main/capturas/3.png)
+
+## Comandos
+
+![alt text](https://github.com/AlexHu65/blackbone/blob/main/capturas/1.png)
+
+![alt text](https://github.com/AlexHu65/blackbone/blob/main/capturas/2.png)
+
+Dentro de la carpeta public de la aplicacion se agrego un xml con los datos necesesarios para hacer la ejecucion de los comandos que se agregaron a la aplicacion.
+
+Comandos
+1. php artisan command:zipcodes1
+2. php artisan command:zipcodes2
+3. php artisan command:zipcodes3
+
+## Ruta de pruebas
+![alt text](https://github.com/AlexHu65/blackbone/blob/main/capturas/5.png)
+
+Para hacer el deploy del sistema, se utilizo una instancia gratuita de amazon ec2
+http://ec2-54-146-143-160.compute-1.amazonaws.com/api/zip-codes/{zip_code}
+
+Ejemplo:
+http://ec2-54-146-143-160.compute-1.amazonaws.com/api/zip-codes/37204
