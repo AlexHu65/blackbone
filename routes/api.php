@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('zip-codes/{zip_code}', 'ZipCodesController@zipCodes')->name('get-zipcodes');
+Route::get('states', 'ZipCodesController@getStates')->name('get-states');
 

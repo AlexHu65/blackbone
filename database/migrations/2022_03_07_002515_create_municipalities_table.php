@@ -16,6 +16,7 @@ class CreateMunicipalitiesTable extends Migration
         Schema::create('municipalities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('ciudad');
             $table->integer('id_federal_entity');
             $table->integer('id_municipality');
             $table->integer('id_asenta_cpcons');

@@ -60,8 +60,9 @@ class ZipCodes2 extends Command
                 ->first();    
                 
                 if(!$municipio){
-                    DB::insert('insert into municipalities (name,id_federal_entity,id_municipality,id_asenta_cpcons) values (?,?,?,?)', 
+                    DB::insert('insert into municipalities (name,ciudad,id_federal_entity,id_municipality,id_asenta_cpcons) values (?,?,?,?,?)', 
                     [$phpDataArray['table'][$i]['D_mnpio'],
+                    (isset($phpDataArray['table'][$i]['d_ciudad']) ? $phpDataArray['table'][$i]['d_ciudad'] : $phpDataArray['table'][$i]['D_mnpio']),
                     $phpDataArray['table'][$i]['c_estado'],
                     $phpDataArray['table'][$i]['c_mnpio'],
                     $phpDataArray['table'][$i]['id_asenta_cpcons']]);

@@ -10,7 +10,7 @@ class ReadXmlController extends Controller
     //Utilizamos este metodo para leer un archivo xml primeramente
     public function index(Request $request){
 
-        ini_set('memory_limit','50000M');
+        ini_set('memory_limit','150000M');
 
         $xmlDataString = file_get_contents(public_path('zipcodes.xml'));
         $xmlObject = simplexml_load_string($xmlDataString,'SimpleXMLElement',LIBXML_NOWARNING );
@@ -19,7 +19,7 @@ class ReadXmlController extends Controller
         $phpDataArray = json_decode($json, true); 
 
         echo '<pre>';
-        print_r($phpDataArray);
+        print_r($phpDataArray['table']);
         echo '</pre>';
         
     }

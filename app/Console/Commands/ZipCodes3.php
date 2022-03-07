@@ -55,18 +55,38 @@ class ZipCodes3 extends Command
 
                 echo  'Se inserta asentamiento: ' . $phpDataArray['table'][$i]['d_codigo'] . nl2br("\n");
 
+
+                // se inserta el tipo de asentamiento
+                $asentamiento_type = DB::table('settlements_types')
+                ->where('name', $phpDataArray['table'][$i]['d_tipo_asenta'])
+                ->first();
+                
+                if(!$asentamiento_type){
+                    DB::insert('insert into settlements_types (name) values (?)', 
+                    [$phpDataArray['table'][$i]['d_tipo_asenta']]);
+                }   
+
+                // una vez que ya insertamos el asentamiento generamos el id
                 $asentamiento = DB::table('zipsettlements')
                 ->where('name', $phpDataArray['table'][$i]['d_asenta'])
                 ->where('id_federal_entity')
                 ->first();    
                 
                 if(!$asentamiento){
-                    DB::insert('insert into zipsettlements (name,zone_type,id_federal_entity,id_municipality,id_asenta_cpcons,codigo) values (?,?,?,?,?,?)', 
-                    [$phpDataArray['table'][$i]['d_asenta'],
+
+                    //buscar el asentamiento id
+                    $asentamiento_type_id = DB::table('settlements_types')
+                    ->where('name', $phpDataArray['table'][$i]['d_tipo_asenta'])
+                    ->first('id');
+
+                    DB::insert('insert into zipsettlements (name,zone_type,settlement_type,id_federal_entity,id_municipality,id_asenta_cpcons,id_settlement_type,codigo) values (?,?,?,?,?,?,?,?)', 
+                    [strtoupper($this->eliminar_acentos($phpDataArray['table'][$i]['d_asenta'])),
+                    $phpDataArray['table'][$i]['d_zona'],
                     $phpDataArray['table'][$i]['d_tipo_asenta'],
                     $phpDataArray['table'][$i]['c_estado'],
                     $phpDataArray['table'][$i]['c_mnpio'],
                     $phpDataArray['table'][$i]['id_asenta_cpcons'],
+                    $asentamiento_type_id->id,
                     $phpDataArray['table'][$i]['d_codigo']]);
                 }   
             
@@ -79,4 +99,47 @@ class ZipCodes3 extends Command
         return 'success';
 
     }
+
+    function eliminar_acentos($cadena){
+		
+		//Reemplazamos la A y a
+		$cadena = str_replace(
+		array('Á', 'À', 'Â', 'Ä', 'á', 'à', 'ä', 'â', 'ª'),
+		array('A', 'A', 'A', 'A', 'a', 'a', 'a', 'a', 'a'),
+		$cadena
+		);
+ 
+		//Reemplazamos la E y e
+		$cadena = str_replace(
+		array('É', 'È', 'Ê', 'Ë', 'é', 'è', 'ë', 'ê'),
+		array('E', 'E', 'E', 'E', 'e', 'e', 'e', 'e'),
+		$cadena );
+ 
+		//Reemplazamos la I y i
+		$cadena = str_replace(
+		array('Í', 'Ì', 'Ï', 'Î', 'í', 'ì', 'ï', 'î'),
+		array('I', 'I', 'I', 'I', 'i', 'i', 'i', 'i'),
+		$cadena );
+ 
+		//Reemplazamos la O y o
+		$cadena = str_replace(
+		array('Ó', 'Ò', 'Ö', 'Ô', 'ó', 'ò', 'ö', 'ô'),
+		array('O', 'O', 'O', 'O', 'o', 'o', 'o', 'o'),
+		$cadena );
+ 
+		//Reemplazamos la U y u
+		$cadena = str_replace(
+		array('Ú', 'Ù', 'Û', 'Ü', 'ú', 'ù', 'ü', 'û'),
+		array('U', 'U', 'U', 'U', 'u', 'u', 'u', 'u'),
+		$cadena );
+ 
+		//Reemplazamos la N, n, C y c
+		$cadena = str_replace(
+		array('Ñ', 'ñ', 'Ç', 'ç'),
+		array('N', 'n', 'C', 'c'),
+		$cadena
+		);
+		
+		return $cadena;
+	}
 }

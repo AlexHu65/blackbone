@@ -14,12 +14,14 @@ class CreateZipsettlementsTable extends Migration
     public function up()
     {
         Schema::create('zipsettlements', function (Blueprint $table) {
-            $table->id();
+            $table->id('key');
             $table->string('name');
             $table->string('zone_type');
+            $table->string('settlement_type');
             $table->integer('id_federal_entity');
             $table->integer('id_municipality');
             $table->integer('id_asenta_cpcons');
+            $table->integer('id_settlement_type');
             $table->string('codigo');
             $table->timestamps();
         });
