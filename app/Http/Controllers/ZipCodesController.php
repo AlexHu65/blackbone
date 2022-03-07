@@ -23,6 +23,7 @@ class ZipCodesController extends Controller
         $response  = [
             'status' => 200,
             'zip_code' => $request->zip_code,
+            'locality' => $municiple->name,
             'municipality' => [
                 'key' => $municiple->id,
                 'name' => $municiple->name
