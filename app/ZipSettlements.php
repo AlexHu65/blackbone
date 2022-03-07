@@ -17,6 +17,6 @@ class ZipSettlements extends Model
     }
 
     public function settlements_type(){
-        return $this->belongsTo(SettlementsTypes::class, 'id_settlement_type');
+        return $this->belongsTo(SettlementsTypes::class, 'id_settlement_type' )->select(['id', 'name']);
     }
 }
