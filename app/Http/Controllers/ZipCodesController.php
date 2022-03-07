@@ -97,7 +97,8 @@ class ZipCodesController extends Controller
         $states = json_decode(file_get_contents(public_path('states.json')), true);
         foreach ($states as $key => $value) {
             if($value['nombre'] == $state){
-                return $value;                
+                return $value; 
+				               
             }
         }
     }
