@@ -13,6 +13,11 @@ class ZipCodesController extends Controller
 
         $zipSettlements = ZipSettlements::with('settlements_type')->where(['codigo' => $request->zip_code])->get(['id_asenta_cpcons as key', 'name', 'zone_type', 'id_settlement_type']);
 
+		foreach ($zipSettlements as $key => $value) {
+			unset($value->id_settlement_type);
+			unset($value->settlements_type->id);
+		}
+
         $codeFederal = ZipSettlements::where(['codigo' => $request->zip_code])->first(['id_federal_entity']);       
         $municipality = ZipSettlements::where(['codigo' => $request->zip_code])->first(['id_federal_entity', 'id_asenta_cpcons', 'id_municipality']);
 
