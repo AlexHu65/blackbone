@@ -16,7 +16,7 @@ class ZipSettlements extends Model
         return $this->belongsTo('App\FederalEntities');
     }
 
-    public function settlements_type(){
+    public function settlement_type(){
         return $this->belongsTo(SettlementsTypes::class, 'id_settlement_type' )->select(['id', 'name']);
     }
 }
